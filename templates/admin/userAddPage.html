@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 添加管理员 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>
+    <span class="action-span"><a href="/admin_user_manage/userList/">管理员列表</a>
+    </span>
+    <span class="action-span1"><a href="/admin_page/index/">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 添加新管理员 </span>
+    <div style="clear:both"></div>
+</h1>
+
+<div class="tab-div">
+    <div id="tabbar-div">
+        <p>
+            <span class="tab-front" id="general-tab">通用信息</span>
+        </p>
+    </div>
+    <div id="tabbody-div">
+    {% if is_root %}
+        <form enctype="multipart/form-data" action="/admin_user_manage/userAdd/" method="post">
+            {% csrf_token %}
+            <table width="90%" id="general-table" align="center">
+                <tr>
+                    <td class="label">管理员账号:</td>
+                    <td>
+                        <input type="text" name="username" value="" size="30"/>
+                        {% if msg %}
+                        <span class="require-field">{{ msg }}</span>
+                        <a href="/admin_user_manage/userList/">点击此处返回账号列表</a>
+                        {% endif %}
+                        <span id="super_user"></span><br />
+                        <span class="notice-span"id="superuser">请输入管理员账号</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">管理员密码:</td>
+                    <td>
+                        <input type="password" name="password" value="" size="30"/>
+                        <span id="super_psw"></span><br />
+                        <span class="notice-span"id="superpsw">请输入管理员密码</span>
+                    </td>
+                </tr>
+            </table>
+            <div class="button-div">
+                <input type="submit" value=" 确定 " class="button"/>
+                <input type="reset" value=" 重置 " class="button" />
+            </div>
+        </form>
+    {% else %}
+            <span>无权限的访问,请联系超级管理员:</span> <a href="https://mail.qq.com/" target="_blank">1192567449@qq.com</a>
+    {% endif %}
+    </div>
+</div>
+
+<div id="footer">
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。
+</div>
+</body>
+</html>

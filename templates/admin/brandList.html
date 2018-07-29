@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 商品品牌 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body><h1>
+    <span class="action-span"><a href="/goods_manage/brandAdd/">添加品牌</a></span>
+    <span class="action-span1"><a href="/admin_page/index/">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 商品品牌 </span>
+    <div style="clear:both"></div>
+</h1>
+<div class="form-div">
+    <form action="/goods_manage/brandSearch/" name="searchForm" method="post">
+    {% csrf_token %}
+    <img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/icon_search.gif" width="26" height="22" border="0" alt="search" />
+    <input type="text" name="brand_name" size="15" />
+    <input type="submit" value=" 搜索 " class="button" />
+    </form>
+</div>
+<form method="post" action="" name="listForm">
+    <div class="list-div" id="listDiv">
+        <table cellpadding="3" cellspacing="1">
+            <tr>
+                <th>品牌编号</th>
+                <th>品牌名称</th>
+                <th>操作</th>
+            </tr>
+            {% for brand in brand_lists %}
+            <tr>
+                <td align="center"><span>{{ brand.id }}</span></td>
+                <td align="center"><span>{{ brand.name }}</span></td>
+                <td align="center">
+                <a href="#" onclick="changeCat('{{ brand.name }}')" title="编辑">编辑</a> |
+                <a href="#" onclick="removeCat('{{ brand.name }}')" title="编辑">移除</a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td align="center" nowrap="true" colspan="6">
+                    <div id="turn-page">
+                        总计 <span id="totalRecords">{{ p.count }}</span>
+                        个记录分为 <span id="totalPages">{{ p.num_pages }}</span>
+                        页当前第 <span id="pageCurrent">{{ page }}</span>
+                        页，当前页 {{ data_num }} 条数据
+                        <span id="page-link">
+                            <a href="/goods_manage/brandList/?page=1">第一页</a>
+                            {% if brand_lists.has_previous %}
+                            {#  当前页的上一页按钮正常使用#}
+                            <a href="/goods_manage/brandList/?page={{ brand_lists.previous_page_number }}">上一页</a>
+                            {% else %}
+                            {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                            <a href="#">上一页</a>
+                            {% endif %}
+                            {% if brand_lists.has_next %}
+                            <a href="/goods_manage/brandList/?page={{ brand_lists.next_page_number }}">下一页</a>
+                            {% else %}
+                            <a href="#">下一页</a>
+                            {% endif %}
+                            {# 下一页按钮结束#}
+                            <select  onchange="window.location=this.value" id="gotoPage">
+                                {% for num in brand_lists.paginator.page_range %}
+                                {% if num == page %}
+                                <option selected="selected" value='/goods_manage/brandList/?page={{ num }}'>{{ num }}</option>
+                                {% else %}
+                                <option value='/goods_manage/brandList/?page={{ num }}'>{{ num }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+{#<script>#}
+{#    function gotoMyPage() {#}
+{#    var page = $('#gotoPage').val()#}
+{#    post_data = {#}
+{#        'page': page,#}
+{#    }#}
+{#        $.ajax({#}
+{#        url: "/goods_manage/brandList/?page="+page,#}
+{#        type: "GET",#}
+{#        headers:{"X-CSRFToken":$.cookie('csrftoken')},#}
+{#        data: post_data,#}
+{#        success: function (data) {#}
+{#            location.reload()#}
+{##}
+{#        }#}
+{#    });#}
+{#}#}
+{#</script>#}
+
+
+
+
+<div id="footer">
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/brandList.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</body>
+</html>

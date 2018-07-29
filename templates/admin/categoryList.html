@@ -1,0 +1,88 @@
+<!-- $Id: category_list.htm 17019 2010-01-29 10:10:34Z liuhui $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 商品分类 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>
+    <span class="action-span"><a href="/goods_manage/categoryAdd/">添加分类</a></span>
+    <span class="action-span1"><a href="/admin_page/index/">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 商品分类 </span>
+    <div style="clear:both"></div>
+</h1>
+<form method="post" action="" name="listForm">
+    <div class="list-div" id="listDiv">
+        <table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+            <tr>
+                <th>分类编号</th>
+                <th>分类名称</th>
+                <th>操作</th>
+            </tr>
+            {% for category in category_lists %}
+            <foreach name="list" item="val">
+            <tr align="center" class="0">
+                <td align="center" class="first-cell" >
+                <span>{{ category.id }}</span>
+                </td>
+                <td width="40%" align="center"><span>{{ category.name }}</span></td>
+                <td width="30%" align="center">
+                <a href="#" onclick='changeCat("{{ category.name }}")'>编辑</a> |
+                <a href="#" title="移除" onclick='removeCat("{{ category.name }}")'>移除</a>
+                </td>
+            </tr>
+            </foreach>
+            {% endfor %}
+            <tr>
+                <td align="center" nowrap="true" colspan="6">
+                    <div id="turn-page">
+                        总计 <span id="totalRecords">{{ p.count }}</span>
+                        个记录分为 <span id="totalPages">{{ p.num_pages }}</span>
+                        页当前第 <span id="pageCurrent">{{ page }}</span>
+                        页，当前页 {{ data_num }} 条数据
+                        <span id="page-link">
+                            <a href="/goods_manage/categoryList/?page=1">第一页</a>
+                            {% if category_lists.has_previous %}
+                            {#  当前页的上一页按钮正常使用#}
+                            <a href="/goods_manage/categoryList/?page={{ categoryList.previous_page_number }}">上一页</a>
+                            {% else %}
+                            {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                            <a href="#">上一页</a>
+                            {% endif %}
+                            {% if category_lists.has_next %}
+                            <a href="/goods_manage/categoryList/?page={{ category_lists.next_page_number }}">下一页</a>
+                            {% else %}
+                            <a href="#">下一页</a>
+                            {% endif %}
+                            {# 下一页按钮结束#}
+                            <select  onchange="window.location=this.value" id="gotoPage">
+                                {% for num in category_lists.paginator.page_range %}
+                                {% if num == page %}
+                                <option selected="selected" value='/goods_manage/categoryList/?page={{ num }}'>{{ num }}</option>
+                                {% else %}
+                                <option value='/goods_manage/categoryList/?page={{ num }}'>{{ num }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+
+
+
+        </table>
+    </div>
+</form>
+<div id="footer">
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/categoryList.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</body>
+</html>

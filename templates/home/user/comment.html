@@ -1,0 +1,34 @@
+{% extends 'home/user/base.html' %}
+{% block content %}
+<div class="content fl ml10">
+    <div class="user_hd">
+        <h3>用户评价</h3>
+    </div>
+
+
+<div class="comment_items mt10">
+    {% for comment in comments %}
+    <div class="user_pic">
+        <dl>
+{#            <dt><a href=""><img src="{{ comment.user.icon }}" alt="" /></a></dt>#}
+            <dd><a href="">{{ comment.user.username }}</a></dd>
+        </dl>
+    </div>
+    <div class="item">
+        <div class="title">
+            <span>{{ comment.goods.name }}:{{ comment.goods.description }}</span>
+            <span>{{ comment.create_time }}</span>
+{#                    <strong class="star star5"></strong> <!-- star5表示5星级 start4表示4星级，以此类推 -->#}
+        </div>
+        <div class="comment_content">
+            {{ comment.content }}
+        </div>
+        <div class="comment_content">
+            {{ comment.image}}
+        </div>
+    </div>
+    <div class="cornor"></div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

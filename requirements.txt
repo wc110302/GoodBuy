@@ -1,0 +1,17 @@
+django==2.0.7
+
+pymysql
+
+pillow
+
+redis
+
+django-redis-sessions
+
+djangorestframework
+
+qiniu
+
+django-redis
+xlrd
+xlwt

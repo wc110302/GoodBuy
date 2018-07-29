@@ -1,0 +1,119 @@
+{% extends 'home/user/base.html' %}
+
+{% block content %}
+<div class="content fl ml10">
+			<div class="user_hd">
+				<h3>用户信息</h3>
+			</div>
+
+			<div class="user_bd mt10">
+				<form id="old_information" action="" method="post" enctype="multipart/form-data">
+					<ul>
+                        <li>
+							<label for=""></label>
+                        </li>
+                            {% if user.icon %}
+                                <a class="s-avatar">
+                                <img id="my_icon" src="{{ user.icon }}" width="60" height="60" alt="">
+                                </a>
+{#                            {% else %}#}
+{#                                <input name= "icon" type="file">#}
+						    {% endif %}
+						<li>
+                            {% if user.username %}
+							<label for="">用户名：</label>
+							<strong>{{ user.username }}</strong>
+                            {% endif %}
+						</li>
+						<li>
+							<label for="">性别：</label>
+                            {% if user.sex == 1 %}
+							<strong>男</strong>
+                                {% elif user.sex == 0 %}
+                                <strong>女</strong>
+{#                                {% else %}#}
+{#                                <input type="text" name= "sex" class="txt" placeholder="请输入男或女"/>#}
+						    {% endif %}
+                        </li>
+						<li>
+                        	<label for="">邮箱：</label>
+                            {% if user.email != None %}
+							<strong>{{ user.email }}</strong>
+{#                                {% else %}#}
+{#							<input type="text" name="email" class="txt" placeholder="请输入你的邮箱号"/>#}
+						    {% endif %}
+                        </li>
+						<li>
+							<label for="">手机号码：</label>
+                            {% if user.tel != None %}
+							<strong>{{ user.tel }}</strong>
+{#                                {% else %}#}
+{#							<input type="text" name="tel" class="txt" placeholder="请输入你的手机号"/>#}
+						    {% endif %}
+						</li>
+                    {% if msg %}
+                        <li id="error_msg"> {{ msg }} </li>
+                     {% endif %}
+						<li>
+							<label for="">&nbsp;</label>
+							<a style="cursor: pointer;" onclick="ed_information()">编辑资料></a>
+						</li>
+					</ul>
+				</form>
+            <form id="new_information" action="" method="post" enctype="multipart/form-data" style="display: none">
+                {% csrf_token %}
+					<ul>
+                        <a style="cursor: pointer" onclick="reed_infomation()">&lt;返回</a>
+                        <li>
+							<label for="">头像：</label>
+                        </li>
+                            {% if user.icon %}
+                                <img id="my_icon" src="{{ user.icon }}" width="60" height="60" alt="">
+
+						    {% endif %}
+                            <input name= "icon" type="file">
+                        <li>
+                            {% if user.username %}
+							<label for="">用户名：</label>
+							<input type="text" name="username" value="{{ user.username }}">
+                            {% endif %}
+						</li>
+						<li>
+							<label for="">性别：</label>
+                            {% if user.sex == 1 %}
+							<input type="text" name= "sex" class="txt" value="男">
+                                {% elif user.sex == 0 %}
+                                <input type="text" name= "sex" class="txt" value="女">
+                                {% else %}
+                                <input type="text" name= "sex" class="txt" placeholder="请输入男或女">
+						    {% endif %}
+                        </li>
+						<li>
+                        	<label for="">邮箱：</label>
+                            {% if user.email != None %}
+							<input type="text" name="email" class="txt" value={{ user.email }}>
+                                {% else %}
+							<input type="text" name="email" class="txt" placeholder="请输入你的邮箱号">
+						    {% endif %}
+                        </li>
+						<li>
+							<label for="">手机号码：</label>
+                            {% if user.tel != None %}
+							<input type="text" name="tel" class="txt" value={{ user.tel }}>
+                                {% else %}
+							<input type="text" name="tel" class="txt" placeholder="请输入你的手机号">
+						    {% endif %}
+						</li>
+                    {% if msg %}
+                        <li id="error_msg"> {{ msg }} </li>
+                     {% endif %}
+						<li>
+							<label for="">&nbsp;</label>
+                            <input type="submit" value="提交">
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		<!-- 右侧内容区域 end -->
+{% endblock %}

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 管理员列表 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>
+    <span class="action-span"><a href="/admin_user_manage/userAddPage/">添加新管理员</a></span>
+    <span class="action-span1"><a href="/admin_page/index/">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 管理员列表 </span>
+    <div style="clear:both"></div>
+</h1>
+
+
+<!-- 管理员列表 -->
+<form method="post" action="" name="listForm" onsubmit="">
+    {% csrf_token %}
+    <div class="list-div" id="listDiv">
+        <table cellpadding="3" cellspacing="1">
+            <tr>
+                <th>编号</th>
+                <th>管理员账号</th>
+                <th>操作</th>
+            </tr>
+            <foreach name="list" item="val">
+                {% for name in super_name %}
+            <tr>
+                <td align="center">{{ name.id }}</td>
+                <td align="center" id={{ name.id }}><span>{{ name.username }}</span></td>
+                <td align="center" id="icon">
+                {% if is_root %}
+                    {% if name.id == 1 %}
+                        暂无权限</td>
+                    {% else %}
+                        <a href="#"  onclick="lookUser('{{ name.username }}')" class="mylook" title="查看"><img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/icon_view.gif" width="16" height="16" border="0" /></a>
+                        <a href="#>" onclick="editUser('{{ name.username }}')" title="编辑"><img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/icon_edit.gif" width="16" height="16" border="0" /></a>
+                        <a href="#" onclick="deleteUser('{{ name.username }}')" class="mydelete" title="回收站"><img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/icon_trash.gif" width="16" height="16" border="0" /></a></td>
+                    {% endif %}
+                {% else %}
+                    暂无权限</td>
+                {% endif %}
+            </tr>
+                {% endfor %}
+            </foreach>
+        </table>
+
+    </div>
+</form>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/userList.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+<div id="footer">
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>GOODBUY 管理中心</title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/echarts.common.min.js"></script>
+<script type="text/javascript" src="/static/app/admin/admin_page/js/main.js"></script>
+</head>
+<body>
+<h1>
+    <span class="action-span1"><a href="/admin_page/index">GOODBUY 管理中心</a> </span>
+    <span id="search_id" class="action-span1"></span>
+    <div style="clear:both"></div>
+</h1>
+<div class="list-div">
+    <table id="Amount_of_access_table" cellspacing='1' cellpadding='3'>
+        <tr>
+            <th colspan="4" class="group-title">网站访问量统计信息</th>
+        </tr>
+        <tr>
+            <td width="20%"><a href="#">首页:</a></td>
+            <td width="30%"><strong></strong></td>
+            <td width="20%"><a href="#">搜索页面:</a></td>
+            <td width="30%"><strong></strong></td>
+        </tr>
+        <tr>
+            <td><a href="#">商品页面:</a></td>
+            <td><strong></strong></td>
+            <td><a href="#">个人中心页面:</a></td>
+            <td><strong></strong></td>
+        </tr>
+        <tr>
+            <td><a href="#">登录页面:</a></td>
+            <td><strong></strong></td>
+            <td><a href="#">注册页面:</a></td>
+            <td><strong></strong></td>
+        </tr>
+{#        <tr>#}
+{#            <td><a href="#">部分发货订单:</a></td>#}
+{#            <td><strong>1</strong></td>#}
+{#            <td>&nbsp;</td>#}
+{#            <td>&nbsp;</td>#}
+{#        </tr>#}
+    </table>
+    <div id="Amount_of_access_form" style="width: 1100px;height:300px;"></div>
+    <div>
+
+    </div>
+    <div style="height: 30px; background: #BBDDE5">
+        <input id="date_input" type="date"  min="2018-07-10"  onchange="time_access_change()">
+        <select id="data_select" onchange="date_access_change()">
+            <option value="1">最近7天</option>
+            <option value="2">最近30天</option>
+            <option value="3">最近90天</option>
+        </select>
+    </div>
+        <div id="Amount_of_access2_form" style="width: 1100px;height:300px;"></div>
+    </div>
+<!-- end order statistics -->
+<br />
+<!-- start goods statistics -->
+<div class="list-div">
+    <table id="Hot_Word_table" cellspacing='1' cellpadding='3'>
+        <tr>
+            <th colspan="4" class="group-title">热门对比</th>
+        </tr>
+        <tr>
+            <td><a href="#">傻逼</a></td>
+            <td><strong>0</strong></td>
+            <td><a href="#">爬虫</a></td>
+            <td><strong>0</strong></td>
+        </tr>
+        <tr>
+            <td><a href="#">傻逼</a></td>
+            <td><strong>0</strong></td>
+            <td><a href="#">爬虫</a></td>
+            <td><strong>0</strong></td>
+        </tr>
+        <tr>
+            <td><a href="#">傻逼</a></td>
+            <td><strong>0</strong></td>
+            <td><a href="#">爬虫</a></td>
+            <td><strong>0</strong></td>
+        </tr>
+    </table>
+    <div id="Hot_Word_from" style="width: 1100px;height:300px;"></div>
+</div>
+<!-- end order statistics -->
+<br />
+<!-- start goods statistics -->
+<div class="list-div">
+    <table id="focus_goods_table" cellspacing='3' cellpadding='1'>
+        <tr>
+            <th colspan="4" class="group-title">热门对比</th>
+        </tr>
+        <tr>
+            <td><a href="#">傻逼</a></td>
+            <td><strong>0</strong></td>
+        </tr>
+        <tr>
+            <td><a href="#">爬虫</a></td>
+            <td><strong>0</strong></td>
+        </tr>
+        <tr>
+            <td><a href="#">呵呵哒</a></td>
+            <td><strong>0</strong></td>
+        </tr>
+    </table>
+</div>
+<!-- end order statistics -->
+<br>
+<!-- start system information -->
+<div class="list-div">
+    <table cellspacing='1' cellpadding='3'>
+        <tr>
+            <th colspan="4" class="group-title">系统信息</th>
+        </tr>
+        <tr>
+            <td width="20%">服务器操作系统:</td>
+            <td width="30%">LINUX (CentOS)</td>
+            <td width="20%">Web 服务器:</td>
+            <td width="30%">Nginx</td>
+        </tr>
+        <tr>
+            <td>PYTHON 版本:</td>
+            <td>3.6.4</td>
+            <td>MySQL 版本:</td>
+            <td>5.5.56</td>
+        </tr>
+        <tr>
+            <td>安全模式:</td>
+            <td>否</td>
+            <td>安全模式GID:</td>
+            <td>否</td>
+        </tr>
+        <tr>
+            <td>Socket 支持:</td>
+            <td>是</td>
+            <td>时区设置:</td>
+            <td>Asia/Shanghai</td>
+        </tr>
+        <tr>
+            <td>GD 版本:</td>
+            <td>GD2 ( JPEG GIF PNG)</td>
+            <td>Zlib 支持:</td>
+            <td>是</td>
+        </tr>
+        <tr>
+            <td>IP 库版本:</td>
+            <td>20071024</td>
+            <td>文件上传的最大大小:</td>
+            <td>2M</td>
+        </tr>
+    </table>
+</div>
+<div id="footer">
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。
+</div>
+</body>
+</html>

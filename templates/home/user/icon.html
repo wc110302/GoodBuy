@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form method="post" action="http://127.0.0.1:8000/user/user_icon/" enctype="multipart/form-data">
+            {% csrf_token %}
+		  <input name="avatar" type="file" />
+		  <input type="submit" value="提交"/>
+		</form>
+	</body>
+</html>

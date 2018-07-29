@@ -1,0 +1,24 @@
+{% extends 'home/user/base.html' %}
+{% load static %}
+{% block content %}
+<div class="content fl ml10">
+    <div class="user_hd">
+        <h3>用户收藏</h3>
+    </div>
+    <div class="goodslist mt10">
+        {% for good in goods %}
+        <ul>
+            <li>
+                <dl>
+                    <dt><a href=""><img src="{{ good.source }}" alt="" /></a></dt>
+                    <dd><a href="">{{ good.describtion }}</a></dt>
+                    <dd><strong>{{ good.c_price }}</strong></dt>
+                    <dd><a href=""><em>已有{{ good.comments_amount }}人评价</em></a></dt>
+                </dl>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

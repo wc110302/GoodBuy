@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 商品列表 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>
+    <span class="action-span"><a href="/goods_manage/goodsAdd/">添加新商品</a></span>
+    <span class="action-span1"><a href="/admin_page/index/">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 商品列表 </span>
+    <div style="clear:both"></div>
+</h1>
+<div class="form-div">
+    <form action="/goods_manage/goodsSearch/" name="searchForm" method="POST">
+    {% csrf_token %}
+        <img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/icon_search.gif" width="26" height="22" border="0" alt="search" />
+        <!-- 分类 -->
+        <select name="cat_id">
+            <option value="0">所有分类</option>
+            {% for class in classification %}
+            <foreach name="cat_list" item="val">
+            <option value="{{ class.id }}">{{ class.name }}</option>
+            </foreach>
+            {% endfor %}
+        </select>
+        <!-- 品牌 -->
+        <select name="brand_id">
+            <option value="0">所有品牌</option>
+            {% for brand in brandlist %}
+            <foreach name="brand_list" item="val">
+            <option value="{{ brand.id }}">{{ brand.name }}</option>
+            </foreach>
+            {% endfor %}
+        </select>
+        <!-- 关键字 -->
+        关键字 <input type="text" name="keyword" size="15" />
+        <input type="submit" value=" 搜索 " class="button" />
+    </form>
+</div>
+
+<!-- 商品列表 -->
+<form method="post" action="" name="listForm" onsubmit="">
+    <div class="list-div" id="listDiv">
+        <table cellpadding="3" cellspacing="1">
+            <tr>
+                <th>编号</th>
+                <th>商品名称</th>
+                <th>价格</th>
+                <th>描述</th>
+                <th>评论数</th>
+                <th>销量</th>
+                <th>来源</th>
+                <th>类别</th>
+                <th>品牌</th>
+                <th>操作</th>
+            </tr>
+            <foreach name="list" item="val">
+            <tr>
+                {% for goods in goods_lists %}
+                {% csrf_token %}
+                <td align="center">{{ goods.id }}</td>
+                <td align="center" class="first-cell"><span>{{ goods.name }}</span></td>
+                <td align="center"><span onclick="">{{ goods.c_price }}</span></td>
+                <td align="center"><span>{{ goods.description }}</span></td>
+                <td align="center">{{ goods.comments_amount }}</td>
+                <td align="center">{{ goods.sales_number }}</td>
+                <td align="center">{{ goods.source }}</td>
+                <td align="center">{{ goods.subclassification.name }}</td>
+                <td align="center">{{ goods.brand.name }}</td>
+                <td>
+                <a href="#" onclick="removeGoods('{{ goods.name }}')" title="回收站"><img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/icon_trash.gif" width="16" height="16" border="0" /></a></td>
+            </tr>
+                {% endfor %}
+            </foreach>
+                    <tr>
+                <td align="center" nowrap="true" colspan="6">
+                    <div id="turn-page">
+                        总计 <span id="totalRecords">{{ p.count }}</span>
+                        个记录分为 <span id="totalPages">{{ p.num_pages }}</span>
+                        页当前第 <span id="pageCurrent">{{ page }}</span>
+                        页，当前页 {{ data_num }} 条数据
+                        <span id="page-link">
+                            <a href="/goods_manage/goodsList/?page=1">第一页</a>
+                            {% if goods_lists.has_previous %}
+                            {#  当前页的上一页按钮正常使用#}
+                            <a href="/goods_manage/goodsList/?page={{ goods_lists.previous_page_number }}">上一页</a>
+                            {% else %}
+                            {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                            <a href="#">上一页</a>
+                            {% endif %}
+                            {% if goods_lists.has_next %}
+                            <a href="/goods_manage/goodsList/?page={{ goods_lists.next_page_number }}">下一页</a>
+                            {% else %}
+                            <a href="#">下一页</a>
+                            {% endif %}
+                            {# 下一页按钮结束#}
+                            <select  onchange="window.location=this.value" id="gotoPage">
+                                {% for num in goods_lists.paginator.page_range %}
+                                {% if num == page %}
+                                <option selected="selected" value='/goods_manage/goodsList/?page={{ num }}'>{{ num }}</option>
+                                {% else %}
+                                <option value='/goods_manage/goodsList/?page={{ num }}'>{{ num }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</form>
+
+<div id="footer">
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/goodsList.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</body>
+</html>

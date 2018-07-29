@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#header-div {
+  background:#278296;
+  border-bottom:1px solid #FFF;
+}
+
+#logo-div {
+  height:50px;
+  float:left;
+}
+
+#submenu-div {
+  height:50px;
+}
+
+#submenu-div ul {
+  margin:3px 20px 0 0;
+  padding:0;
+  float:right;
+  list-style-type:none;
+}
+
+#submenu-div li {
+  float:left;
+  padding:0 10px;
+  margin:3px 0;
+  border-right:1px solid #FFF;
+}
+
+#submenu-div a:visited, #submenu-div a:link {
+  color:#FFF;
+  text-decoration:none;
+}
+
+#submenu-div a:hover {
+  color:#F5C29A;
+}
+
+#loading-div {
+  clear:right;
+  text-align:right;
+  display:block;
+}
+
+#menu-div {
+  background:#80BDCB;
+  font-weight:bold;
+  height:24px;
+  line-height:24px;
+}
+
+#menu-div ul {
+  margin:0;
+  padding:0;
+  list-style-type:none;
+}
+
+#menu-div li {
+  float:left;
+  border-right:1px solid #192E32;
+  border-left:1px solid #BBDDE5;
+}
+
+#menu-div a:visited, #menu-div a:link {
+  display:block;
+  padding:0 20px;
+  text-decoration:none;
+  color:#335B64;
+  background:#9CCBD6;
+}
+
+#menu-div a:hover {
+  color:#000;
+  background:#80BDCB;
+}
+
+#submenu-div a.fix-submenu{
+    clear:both;
+    margin-left:5px;
+    padding:1px 5px;
+    background:#DDEEF2;
+    color:#278296;
+}
+
+#submenu-div a.fix-submenu:hover{
+    padding:1px 5px;
+    background:#FFF;
+    color:#278296;
+}
+
+#menu-div li.fix-spacel{
+    width:30px;
+    border-left:none;
+}
+
+#menu-div li.fix-spacer{
+    border-right:none;
+}
+#send_info {
+  padding:5px 30px 0 0;
+  clear:right;
+  text-align:right;
+  color:#FF9900;
+  width:40%;
+  float:right;  
+}
+</style>
+
+</head>
+<body>
+<div id="header-div">
+    <div id="logo-div" style="bgcolor:#000000;">
+        <img src="http://pbu0s2z3p.bkt.clouddn.com/static/images/ecshop_logo.gif" alt="ECSHOP - power for e-commerce" onclick="re_index()" style="cursor: pointer" />
+    </div>
+    <div id="submenu-div">
+        <ul>
+            <li><a href="/index/" target="_blank">查看官网</a></li>
+            <li><a href="#" target="main-frame">{{ admin_user_name }}</a></li>
+            <li style="border-right:none"><a href="/admin_page/index">刷新</a></li>
+        </ul>
+        <div id="send_info">
+            <a href="#" target="main-frame" class="fix-submenu">清除缓存</a>
+            <a href="/admin_page/logout/" target="_top" class="fix-submenu">退出</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function re_index() {
+        location.href = '/admin_page/index'
+    }
+</script>
+</body>
+</html>
